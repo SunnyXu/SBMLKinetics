@@ -28,15 +28,18 @@ class KineticLaw(object):
     # libsbml object for kinetics
     self.libsbml_kinetics = libsbml_kinetics
     # String version of chemical formula
-    self.formula = self.libsbml_kinetics.getFormula()
+    try:
+      self.formula = self.libsbml_kinetics.getFormula()
+    except:
+      self.formula = ""
     # Reaction for the kinetics law
     self.reaction = reaction
     # Parameters and chemical species
     # self.symbols = self._getSymbols()
     try:
-        self.symbols = self._getSymbols()
+      self.symbols = self._getSymbols()
     except Exception:
-        self.symbols = []
+      self.symbols = []
     # Expanded kinetic formula (remove embedded functions)
     if function_definitions is None:
       self.expanded_formula = None
